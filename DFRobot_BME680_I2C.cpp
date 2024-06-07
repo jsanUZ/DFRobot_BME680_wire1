@@ -14,13 +14,13 @@
 
 static int8_t bme680_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *data, uint16_t len)
 {
-  Wire.begin();
-  Wire.beginTransmission(dev_id);
-  Wire.write(reg_addr);
-  Wire.endTransmission();
-  Wire.requestFrom(dev_id, (uint8_t)len);
-  while(Wire.available()) {
-    *data = Wire.read();
+  Wire1.begin();
+  Wire1.beginTransmission(dev_id);
+  Wire1.write(reg_addr);
+  Wire1.endTransmission();
+  Wire1.requestFrom(dev_id, (uint8_t)len);
+  while(Wire1.available()) {
+    *data = Wire1.read();
     data ++;
   }
   return 0;
@@ -29,14 +29,14 @@ static int8_t bme680_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *data, u
 
 static int8_t bme680_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *data, uint16_t len)
 {
-  Wire.begin();
-  Wire.beginTransmission(dev_id);
-  Wire.write(reg_addr);
+  Wire1.begin();
+  Wire1.beginTransmission(dev_id);
+  Wire1.write(reg_addr);
   while(len --) {
-    Wire.write(*data);
+    Wire1.write(*data);
     data ++;
   }
-  Wire.endTransmission();
+  Wire1.endTransmission();
   return 0;
 }
 
